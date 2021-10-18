@@ -2,9 +2,13 @@
 #include <DHT.h>
 
 // instantiate dht11
-#define DHTPIN 4
-#define DHTTYPE DHT11
-DHT dht0 (DHTPIN,DHTTYPE);
+#define DHT_0_PIN 4
+#define DHT_0_TYPE DHT11
+DHT dht_0 (DHT_0_PIN,DHT_0_TYPE);
+
+// instantiae PIR
+#define PIR_0_PIN 7
+#define reading
 
 void setup() {
   // put your setup code here, to run once:
@@ -13,7 +17,7 @@ void setup() {
   Serial.begin(9600);
 
   //initialize up DHT11
-  dht0.begin();
+  dht_0.begin();
 }
 
 void loop() {
@@ -21,11 +25,11 @@ void loop() {
 }
 
 // returns <float> temperature using DHT11
-float getTemperature(DHT dht) {
+float get_temperature(DHT dht) {
   return dht.readTemperature();
 }
 
 // returns <float> humidity using DHT11
-float getHumidity(DHT dht) {
+float get_humidity(DHT dht) {
   return dht.readHumidity();
 }
