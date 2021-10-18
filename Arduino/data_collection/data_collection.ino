@@ -4,7 +4,7 @@
 // instantiate dht11
 #define DHTPIN 4
 #define DHTTYPE DHT11
-DHT dht (DHTPIN,DHTTYPE);
+DHT dht0 (DHTPIN,DHTTYPE);
 
 void setup() {
   // put your setup code here, to run once:
@@ -13,7 +13,7 @@ void setup() {
   Serial.begin(9600);
 
   //initialize up DHT11
-  dht.begin();
+  dht0.begin();
 }
 
 void loop() {
@@ -21,11 +21,11 @@ void loop() {
 }
 
 // returns <float> temperature using DHT11
-float getTemperature() {
+float getTemperature(DHT dht) {
   return dht.readTemperature();
 }
 
 // returns <float> humidity using DHT11
-float getHumidity() {
+float getHumidity(DHT dht) {
   return dht.readHumidity();
 }
