@@ -1,5 +1,9 @@
-// DHT library
+#include <DHT_U.h>
+#include <ArduinoJson.h>
 #include <DHT.h>
+
+// instansiating pseudo json capable of holding 5 objects
+StaticJsonDocument<JSON_OBJECT_SIZE(5)> json;
 
 // instantiate dht11
 #define DHT_0_PIN 4
@@ -44,7 +48,13 @@ void loop() {
   *PIR_0_count = 0;
   
   sei();
-  delay(60000);
+
+  //updating and serializing json 
+  json["temperature"] = 0;
+  json["humidity"] = 0;
+  serializeJson(json, Serial);
+  Serial.println();
+  delay(6000);
 }
 
 // params <DHT> dht: dht sensor
