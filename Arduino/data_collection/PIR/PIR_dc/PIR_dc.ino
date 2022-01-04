@@ -46,7 +46,7 @@ void read_PIR() {
   int i;
   for(i = 0; i<10; i++) {
     PIR_current_read[i] = digitalRead(i+2);
-    if(PIR_last_read[i] != PIR_current_read[i]) {
+    if((PIR_last_read[i] == 0) && (PIR_current_read[i] == 1)) {
       PIR_count[i]++;
     }
     PIR_last_read[i] = PIR_current_read[i];
