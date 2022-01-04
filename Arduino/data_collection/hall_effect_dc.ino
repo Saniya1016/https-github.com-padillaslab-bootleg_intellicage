@@ -8,8 +8,10 @@ volatile int HE_count[] = {0,0,0,0,0,0,0,0,0,0};
 
 void setup() {
   Serial.begin(9600);
+  cli();
   initialize_pins();
   initialize_timer();
+  sei();
 }
 
 void loop() {
