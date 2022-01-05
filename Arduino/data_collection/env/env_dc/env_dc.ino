@@ -10,6 +10,9 @@ DynamicJsonDocument json(1024);
 
 void setup() {
   // put your setup code here, to run once:
+  json["type"] = "env";
+  json["ID"] = 0;
+  
   Serial.begin(9600);
   dht.begin();
   pinMode(3, INPUT);
@@ -17,6 +20,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly
+  delay(60000);
+  serialize_data();
+}
+
+void serialize_data() {
   json["humidity"] = dht.readHumidity();
   json["temperature"] = dht.readTemperature();
   if(digitalRead(photo_pin)==0) {
@@ -27,6 +35,4 @@ void loop() {
   
   serializeJson(json, Serial);
   Serial.println();
-
-  delay(10000);
 }

@@ -1,6 +1,6 @@
 #include <ArduinoJson.h>
 
-//DynamicJsonDocument json(1024);
+DynamicJsonDocument json(1024);
 
 volatile int HE_last_read[] = {0,0,0,0,0,0,0,0,0,0};
 volatile int HE_current_read[] = {0,0,0,0,0,0,0,0,0,0};
@@ -18,7 +18,7 @@ void loop() {
   cli();
   serialize_reset_data();
   sei();
-  delay(60000);
+  delay(5000);
 }
 
 ISR(TIMER1_COMPA_vect){
@@ -54,13 +54,13 @@ void read_HE() {
 }
 
 void serialize_reset_data() {
-//  int i = 0;
-//  for(i=0; i<10; i++){
-//    json[i] = HE_count[i];
-//  }
-//  serializeJson(json, Serial);
-//  Serial.println();
-//  for(i=0; i<10; i++){
-//    HE_count[i] = 0;
-//  }
+  int i = 0;
+  for(i=0; i<10; i++){
+    json[i] = HE_count[i];
+  }
+  serializeJson(json, Serial);
+  Serial.println();
+  for(i=0; i<10; i++){
+    HE_count[i] = 0;
+  }
 }

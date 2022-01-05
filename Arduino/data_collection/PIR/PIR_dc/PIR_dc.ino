@@ -9,16 +9,18 @@ volatile int PIR_count[] = {0,0,0,0,0,0,0,0,0,0};
 void setup() {
   Serial.begin(9600);
   cli();
+  json["type"] = "PIR";
+  json["ID"] = 0;
   initialize_pins();
   initialize_timer();
   sei();
 }
 
 void loop() {
+  delay(60000);
   cli();
   serialize_reset_data();
   sei();
-  delay(60000);
 }
 
 ISR(TIMER1_COMPA_vect){
@@ -56,7 +58,7 @@ void read_PIR() {
 void serialize_reset_data() {
   int i = 0;
   for(i=0; i<10; i++){
-    json[i] = PIR_count[i];
+    json["data"][i] = PIR_count[i];
   }
   serializeJson(json, Serial);
   Serial.println();
