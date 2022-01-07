@@ -24,7 +24,6 @@ void setup() {
   json["ID"] = 0;
   setup_scales();
   Serial.begin(9600);
-  Serial.println("ran setup");
 }
 
 void loop() {
@@ -35,23 +34,23 @@ void loop() {
 
 void setup_scales() {
    int i;
-   for(i=0; i<=9; i++) {
+   for(i=0; i<=0; i++) {
     scales[i].begin(i+2, 12);
-    if(scale1.wait_ready_timeout(1000)) {
-      scales[i].set_scale(CAL_FAC);
+//    if(scale1.wait_ready_timeout(1000)) {
+      scales[i].set_scale(1290);
       scales[i].tare();
-    }
+//    }
    }
 }
 
 void serialize_data() {
   int i;
-  for(i=0; i <=9; i ++){
-    if(scale1.wait_ready_timeout(1000)) {
+  for(i=0; i <=0; i ++){
+//    if(scale1.wait_ready_timeout(1000)) {
       json["data"][i] = scales[i].get_units();
-    } else {
-      json["data"][i] = 0;
-    }
+//    } else {
+//      json["data"][i] = 0;
+//    }
   }
   serializeJson(json, Serial);
   Serial.println();

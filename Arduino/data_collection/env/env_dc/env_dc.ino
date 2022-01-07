@@ -2,7 +2,7 @@
 #include <DHT.h>
 
 #define photo_pin 3
-#define DHT_pin 2
+#define DHT_pin 4
 
 DHT dht(DHT_pin, DHT11);
 
@@ -12,15 +12,14 @@ void setup() {
   // put your setup code here, to run once:
   json["type"] = "env";
   json["ID"] = 0;
-  
   Serial.begin(9600);
   dht.begin();
-  pinMode(3, INPUT);
+  pinMode(photo_pin, INPUT);
 }
 
 void loop() {
   // put your main code here, to run repeatedly
-  delay(60000);
+  delay(20000);
   serialize_data();
 }
 
@@ -32,7 +31,6 @@ void serialize_data() {
   } else {
     json["photo"] =  0;
   }
-  
   serializeJson(json, Serial);
   Serial.println();
 }

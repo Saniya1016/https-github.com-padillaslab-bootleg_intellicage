@@ -17,7 +17,7 @@ void setup() {
 }
 
 void loop() {
-  delay(60000);
+  delay(20000);
   cli();
   serialize_reset_data();
   sei();
@@ -44,7 +44,6 @@ void initialize_pins() {
 }
 
 void read_PIR() {
-  // Hall Effect
   int i;
   for(i = 0; i<10; i++) {
     PIR_current_read[i] = digitalRead(i+2);
