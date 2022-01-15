@@ -17,6 +17,7 @@ HX711 scale7;
 HX711 scale8;
 HX711 scale9;
 HX711 scales[] = {scale0, scale1, scale2, scale3, scale4, scale5, scale6, scale7, scale8, scale9};
+int cal_fac[] = {1690, 1690, 470, 1750};
 
 void setup() {
   // put your setup code here, to run once:
@@ -28,16 +29,16 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  delay(5000);
+  delay(60000);
   serialize_data();
 }
 
 void setup_scales() {
    int i;
-   for(i=0; i<=0; i++) {
+   for(i=0; i<=3; i++) {
     scales[i].begin(i+2, 12);
 //    if(scale1.wait_ready_timeout(1000)) {
-      scales[i].set_scale(1290);
+      scales[i].set_scale(cal_fac[i]);
       scales[i].tare();
 //    }
    }
@@ -45,7 +46,7 @@ void setup_scales() {
 
 void serialize_data() {
   int i;
-  for(i=0; i <=0; i ++){
+  for(i=0; i <=3; i ++){
 //    if(scale1.wait_ready_timeout(1000)) {
       json["data"][i] = scales[i].get_units();
 //    } else {
