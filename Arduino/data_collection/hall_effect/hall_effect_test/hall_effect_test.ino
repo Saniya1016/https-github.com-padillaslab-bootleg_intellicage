@@ -19,14 +19,14 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  delay(60000);
+  delay(5000);
   cli();
   serialize_reset_data();
   sei();
 }
 
 void serialize_reset_data() {
-  json["count"] = count;
+  json["count"] = count/2;
   count = 0;
   serializeJson(json, Serial);
   Serial.println();

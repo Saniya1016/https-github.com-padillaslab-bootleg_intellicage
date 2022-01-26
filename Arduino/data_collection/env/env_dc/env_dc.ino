@@ -19,7 +19,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly
-  delay(20000);
+  delay(60000);
   serialize_data();
 }
 

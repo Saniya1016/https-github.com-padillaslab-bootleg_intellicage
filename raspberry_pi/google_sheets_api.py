@@ -42,7 +42,7 @@ with open('env_output.csv', 'w', newline='') as env_output:
                         
                         if(json_output["type"]=="env"):
                             data_arr = [json_output["ID"], datetime.now(), json_output["humidity"], json_output["temperature"], json_output["photo"]]
-                            env_writer.writerow(data_arr) 
+                            env_writer.writerow(data_arr)
 
                         if(json_output["type"]=="PIR"):
                             data_arr = [json_output["ID"], datetime.now()]
