@@ -17,7 +17,7 @@ void setup() {
 }
 
 void loop() {
-  delay(60000);
+  delay(19000);
   cli();
   serialize_reset_data();
   sei();
