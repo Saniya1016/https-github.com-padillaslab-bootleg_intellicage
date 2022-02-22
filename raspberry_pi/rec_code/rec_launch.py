@@ -61,6 +61,8 @@ def upd_ard_win():
     for i in range(len(operator)):
         if operator[i] not in recent_data.keys():
             continue
+        if recent_data[operator[i]] == []:
+            continue
         for j in range(12):
             if j==11:
                 rows[i][j]['text'] = "Stop " + recent_data[operator[i]][0]

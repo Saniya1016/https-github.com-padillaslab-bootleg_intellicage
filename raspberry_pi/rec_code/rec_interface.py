@@ -11,16 +11,19 @@ class DATA_REC_INTERFACE:
 
     def __init__(self, time_out=10):
         self.ser_TOUT = time_out
-        with open("operator.json") as f:
-            self.ard_port_arr = json.dump(f)
+        with open("operator.json", 'r') as f:
+            self.ard_port_arr = json.load(f)
         self.refresh_recent_data_json()
 
     def add_new_serial(self): ## add all new serials to operator
         ard_port_arr_change = False
 
         for com in serial.tools.list_ports.comports():
-            ard_ser = serial.Serial(com.name, 9600, timeout=self.ser_TOUT)
-            ard_output = ard_ser.readline().strip()
+            try:
+                ard_ser = serial.Serial(com.name, 9600, timeout=self.ser_TOUT)
+                ard_output = ard_ser.readline().strip()
+            except:
+                continue
             
             if ard_output == "": ##serail test
                 ard_ser.close()
@@ -42,7 +45,7 @@ class DATA_REC_INTERFACE:
                 elif ard_output['type'] == "TS":
                     if com.name not in self.ard_port_arr:
                         ard_port_arr_change = True
-                        PIR_prmt_str = "python TS_data_collector.py " + com.name
+                        PIR_prmt_str = "python touch_sensor_data_collector.py " + com.name
                         self.start_rec(com.name, PIR_prmt_str)
                 ## add for all types of arduinos
         if ard_port_arr_change: ## refresh operator if ard_port_dict is changed
