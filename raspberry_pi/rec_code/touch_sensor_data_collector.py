@@ -35,10 +35,6 @@ with open(csv_name, 'w', newline='') as touch_sensor_output:
         
         run = True
         while run:
-            ##check operator json
-            if not run:
-                break
-
             ## load data
             json_output = json.loads(ard.readline().strip())
 
@@ -55,6 +51,8 @@ with open(csv_name, 'w', newline='') as touch_sensor_output:
             temp_data[port].insert(0, "TS " + str(data_arr[0])) ## add name of touch_sensor
             with open('recent_data.json', 'w') as f:
                 json.dump(temp_data, f)
+
+            ##check operator json
             run = check_operator()
         
         ard.close()
