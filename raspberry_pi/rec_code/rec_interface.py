@@ -15,7 +15,8 @@ class DATA_REC_INTERFACE:
             self.ard_port_arr = json.load(f)
         self.refresh_recent_data_json()
 
-    def add_new_serial(self): ## add all new serials to operator
+    ## add all new serials to operator
+    def add_new_serial(self):
         for com in serial.tools.list_ports.comports():
             try:
                 ard_ser = serial.Serial(com.name, 9600, timeout=self.ser_TOUT)
@@ -44,12 +45,14 @@ class DATA_REC_INTERFACE:
                         PIR_prmt_str = "python touch_sensor_data_collector.py " + com.name
                         self.start_rec(com.name, PIR_prmt_str)
 
+    ## starts recording for an arduino serial using command prmt and adding the serial to an operator
     def start_rec(self, port: str, prmt_str: str) -> None:
         self.ard_port_arr.append(port)
         self.refresh_operator()
         self.refresh_recent_data_json()
         subprocess.Popen(prmt_str, shell=False)
 
+    ## closes recording for a port via updating operator
     def close_rec(self, port: str)-> None:
         def close_rec_func():
             if port in self.ard_port_arr:
@@ -58,11 +61,13 @@ class DATA_REC_INTERFACE:
                 self.refresh_recent_data_json()
         return close_rec_func
     
+    ## closes all recordings via updating operator
     def close_all_recs(self):
         self.ard_port_arr = []
         self.refresh_operator()
         self.refresh_recent_data_json()
 
+    ## refreshes the recent data json file
     def refresh_recent_data_json(self):
         with open("recent_data.json", 'r') as f:
             cur_recent_data = json.load(f)
@@ -79,7 +84,7 @@ class DATA_REC_INTERFACE:
                         temp_json[port] = []
             json.dump(temp_json, f)
 
-
+    ## refreshes the operator json file
     def refresh_operator(self):
         with open("operator.json", 'w') as f:
             json.dump(self.ard_port_arr, f)

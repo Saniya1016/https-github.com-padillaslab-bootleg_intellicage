@@ -21,7 +21,6 @@ action_bar.grid(row=0, column=0)
 ## start button
 start_button = Button(action_bar, text="Start Rec", width=25, command=rec.add_new_serial, background='white')
 start_button.grid(row=0, column=0,padx=13, pady=10)
-
 ## stop button
 stop_button = Button(action_bar, text="Stop Rec", width=25, command=rec.close_all_recs, background='white')
 stop_button.grid(row=0, column=1, padx=13, pady=10)
@@ -29,11 +28,10 @@ stop_button.grid(row=0, column=1, padx=13, pady=10)
 ## Arduino table
 ARD_TBL_LEN = 10
 ARD_TBL_WIDTH = 12
-
 arduino_table = Frame(UI_wdw, background="black")
 arduino_table.grid(row=1, column=0)
 
-##create and grid labels and buttons
+##creates serial data table, grid labels and buttons
 rows = []
 for row_num in range(ARD_TBL_LEN):
     row = []
